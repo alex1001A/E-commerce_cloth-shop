@@ -1,5 +1,6 @@
 //React Hooks/Components
 import React, { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 //Components
 
@@ -10,37 +11,25 @@ import "./Navbar.css";
 import logo from "../assets/logo.png";
 import cart_icon from "../assets/cart_icon.png";
 
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
 
 export const Navbar = () => {
-  const categories = ["shop", "men", "women", "kids"];
-
-  const [menu, setMenu] = useState(null); // Стейт для текущего выбранного меню
-  const listRef = useRef(null); // Реф для элемента списка
-
-  const handleMenuClick = (menuType) => {
-    setMenu(menuType);
-  };
+  const [menu, setMenu] = useState('shop')
 
   return (
     <div className="navbar">
       <div className="nav-logo">
         <img src={logo} alt="" />
-        <p>Shopper</p>
+        <p>SHOPPER</p>
       </div>
-      <ul className="nav-menu" ref={listRef}>
-        {categories.map((item) => (
-          <li key={item} onClick={() => handleMenuClick(item)}>
-            {capitalizeFirstLetter(item)}
-            {menu === item ? <hr /> : null}
-          </li>
-        ))}
+      <ul className="nav-menu">
+        <li onClick={() => {setMenu('shop')}}><Link style={{textDecoration:'none', color:'inherit'} } to='/'>Shop</Link> {menu==='shop'? <hr />:null} </li>
+        <li onClick={() => {setMenu('men')}}><Link style={{textDecoration:'none', color:'inherit'}} to='/men'>Men</Link>{menu==='men'? <hr />:null}</li>
+        <li onClick={() => {setMenu('women')}}><Link style={{textDecoration:'none', color:'inherit'}} to='/women'>Women</Link> {menu==='women'? <hr />:null}</li>
+        <li onClick={() => {setMenu('kids')}}><Link style={{textDecoration:'none', color:'inherit'}} to='/kids'>Kids</Link> {menu==='kids'? <hr />:null}</li>
       </ul>
       <div className="nav-login-cart">
-        <button>Login</button>
-        <img src={cart_icon} alt="" />
+        <Link to='/login'><button>Login</button></Link> 
+        <Link to='/cart'><img src={cart_icon} alt="" /></Link> 
         <div className="nav-cart-count">0</div>
       </div>
     </div>

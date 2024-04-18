@@ -1,9 +1,13 @@
+//React components
 import React from 'react'
+
+//Components
+import { Hero } from '../Components/Hero/Hero'
 
 const Shop = () => {
   return (
     <div>
-        Shop
+        <Hero />
     </div>
   )
 }
